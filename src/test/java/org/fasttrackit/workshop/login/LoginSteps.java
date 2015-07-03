@@ -37,7 +37,7 @@ public class LoginSteps extends TestBaseNative {
     }
 
     @Then("^I check if user was logged in$")
-    public void I_check_if_user_was_logged_in() throws Throwable {
+    public void I_check_if_user_was_logged_in() {
         boolean successLoggedIn = false;
         try {
             WebElement logoutButton = driver.findElement(By.linkText("Logout"));
@@ -73,6 +73,14 @@ public class LoginSteps extends TestBaseNative {
 
     @Then("^I expect \"([^\"]*)\" error message$")
     public void I_expect_error_message(String expectedMessage) {
-       errorMessageShouldBePresent(expectedMessage);
+        errorMessageShouldBePresent(expectedMessage);
+    }
+
+    @Given("^I successfully login$")
+    public void I_successfully_login() {
+        I_access_the_login_page();
+        I_insert_valid_credentials();
+        I_click_on_login_button();
+        I_check_if_user_was_logged_in();
     }
 }
