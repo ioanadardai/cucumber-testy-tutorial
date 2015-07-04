@@ -1,10 +1,12 @@
 package org.fasttrackit.workshop.login;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.fasttrackit.util.TestBase;
 import org.fasttrackit.workshop.Preferences.PreferencesWindow;
+import org.fasttrackit.workshop.menu.MainMenuView;
 
 /**
  * Created by Cuchi on 7/4/2015.
@@ -42,14 +44,17 @@ public class PreferencesSteps extends TestBase {
 
     @Then("^I should see \"([^\"]*)\" message$")
     public void I_should_see_message(String message)  {
-        preferencesWindow.checkIfMessageIsDisplayed();
+        preferencesWindow.statusMessageShouldBePresent(message);
+        LoginSteps.VALID_PASSWORD = NEW_PASSWORD;
     }
 
     @And("^I close the Preferences window$")
     public void I_close_the_Preferences_window()  {
+        preferencesWindow.close();
     }
 
-    @And("^I can re-login with new credentials$")
-    public void I_can_re_login_with_new_credentials()  {
+    @And("^I logout$")
+    public void I_logout()  {
+        MainMenuView.logout();
     }
 }
